@@ -1,0 +1,16 @@
+{
+  "name": "%SERVICE%",
+  "components": {
+    "flask": {
+      "image": "%IMAGE%",
+      "ports": [
+        "%PORT%/tcp"
+      ],
+      "domains": {
+        "%PORT%/tcp": [
+          "%DOMAIN%"
+        ]
+      }
+    }
+  }
+}
