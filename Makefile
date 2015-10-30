@@ -26,7 +26,7 @@ config:
 
 deploy: config push
 	swarm up
-	@echo "Use http://$(DOMAIN)/hubhook/ to push a service from Docker Hub."
+	@echo "Use http://$(DOMAIN)/hubhook/ on Docker Hub's hook to deploy a service."
 
 clean:
 	rm swarm-api.json swarm.json
