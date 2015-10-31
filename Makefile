@@ -1,13 +1,21 @@
+# account info
+USERNAME = $(shell swarm user)
+TOKEN = $(shell cat ~/.swarm/token)
+ENV = $(shell swarm env)
+
 # service info
 SERVICE = inception
 REGISTRY = registry.giantswarm.io
-USERNAME := $(shell swarm user)
 IMAGE = $(REGISTRY)/$(USERNAME)/$(SERVICE)
-DOMAIN=inception-api-$(USERNAME).gigantic.io
-PORT=5000
-DEV_DOMAIN=$(shell boot2docker ip):$(PORT)
+DOMAIN = inception-api-$(USERNAME).gigantic.io
+PORT = 5000
+DEV_DOMAIN = $(shell boot2docker ip):$(PORT)
 
-build:
+token:
+	@echo "token='$(TOKEN)'" > token.py
+	@echo "Token file created at token.py..."
+
+build: token
 	docker build -t $(IMAGE) .
 
 run: build
@@ -29,4 +37,4 @@ deploy: config push
 	@echo "Use http://$(DOMAIN)/hubhook/ on Docker Hub's hook to deploy a service."
 
 clean:
-	rm swarm-api.json swarm.json
+	rm swarm-api.json swarm.json token.py

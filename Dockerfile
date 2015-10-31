@@ -9,9 +9,7 @@ RUN pip install Flask Flask-Cache requests redis
 
 ADD server.py /app/server.py
 ADD templates /app/templates/
-ADD install.sh /app/install.sh
-
-RUN /app/install.sh
+ADD token.py /app/token.py
 
 ENTRYPOINT ["python", "-u", "/app/server.py"]
 
