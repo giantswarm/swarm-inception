@@ -1,6 +1,6 @@
 {
-  "name": "inception",
   "definition": {
+   "name": "inception",
     "components": {
       "flask": {
         "image": "registry.giantswarm.io/kord/inception",

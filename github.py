@@ -1,14 +1,15 @@
 import requests
 import json
 
-def getdeployjson(respository=None, branch=None, filename=None):
+def getdefjson(org=None, repo=None, branch=None, filename=None):
 
 	message = "ok"
-	config = {}
+	definition = {}
 
-	url = "https://%s/%s/%s/%s" % (
+	url = "https://%s/%s/%s/%s/%s" % (
 		"raw.githubusercontent.com",
-		respository,
+		org,
+		repo,
 		branch,
 		filename
 	)
@@ -19,11 +20,16 @@ def getdeployjson(respository=None, branch=None, filename=None):
 			url
 		)
 
-		config = json.loads(result.text)
+		# did we get a 404?
+		if result.status_code == 404:
+			message = "404"
+			data = "not found"
+		else:	
+			data = json.loads(result.text)
 
 	except Exception as ex:
-		config = "error"
+		data = "error"
 		message = "caught exception: %s" % ex
 
 	# return some json
-	return {'config': config, 'response': message}
+	return {'result': data, 'response': message}

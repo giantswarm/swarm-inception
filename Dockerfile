@@ -9,7 +9,6 @@ RUN apt-get update -qq && \
 RUN pip install Flask Flask-Cache requests redis
 
 ADD server.py /app/server.py
-ADD templates /app/templates/
 ADD giantswarm.py /app/giantswarm.py
 ADD github.py /app/github.py
 ADD swarmconfig.py /app/swarmconfig.py

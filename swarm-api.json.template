@@ -1,6 +1,6 @@
 {
-  "name": "%SERVICE%",
   "definition": {
+   "name": "%SERVICE%",
     "components": {
       "flask": {
         "image": "%IMAGE%",
