@@ -26,3 +26,4 @@ Start by heading over to [this repository](https://github.com/giantswarm/swarm-i
 [Follow the instructions](https://github.com/giantswarm/swarm-flask-helloworld/blob/master/README.md#flask-helloworld) in the `README.md` file on the repo, then come back here when you are done.
 
 #### Create Automated Build on Docker Hub
+{"github": {"org": "kordless", "repo": "python-flask-helloworld", "branch": "master"} }
