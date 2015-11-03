@@ -8,7 +8,7 @@ API_SERVER = api.giantswarm.io
 SERVICE = inception
 REGISTRY = registry.giantswarm.io
 IMAGE = $(REGISTRY)/$(USERNAME)/$(SERVICE)
-DOMAIN = inception-api-$(USERNAME).gigantic.io
+DOMAIN = inception-$(USERNAME).gigantic.io
 PORT = 5000
 DEV_DOMAIN = $(shell boot2docker ip):$(PORT)
 
@@ -30,9 +30,9 @@ push: build
 pull:
 	docker pull $(IMAGE)
 
-deploy: config push
+deploy: push
 	swarm up
-	@echo "Use http://$(DOMAIN)/hubhook/ on Docker Hub's hook to deploy a service."
+	@echo "Use http://$(DOMAIN)/$(ENV)/hook on Docker Hub's hook to deploy a service."
 
 clean:
 	rm swarm-api.json swarm.json swarmconfig.py
