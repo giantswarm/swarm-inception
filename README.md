@@ -21,9 +21,9 @@ This project should take you about 10 minutes to run through. We'll start by for
 #### Fork the Repo
 Start by heading over to [the swarm-flask-hello repo](https://github.com/giantswarm/swarm-flask-hello) and **fork it** into your Github account. Make sure you leave the repository public!
 
-There are detailed [instructions](https://github.com/giantswarm/swarm-flask-helloworld/blob/master/README.md#flask-helloworld) on the repository's `README.md` file you may follow.
+There are detailed [instructions](https://github.com/giantswarm/swarm-flask-helloworld/blob/master/README.md#flask-helloworld) on the repository's `README.md` file you may follow. The basics are covered here for review. 
 
-Verify you have built and checked in the `swarm-api.json` file for the `swarm-flask-hello` repo:
+Start by verifying you have built and checked in the `swarm-api.json` file for the `swarm-flask-hello` repo:
 
 ```
 $ cd swarm-flask-hello # ensure this is your forked copy
@@ -57,11 +57,23 @@ You are now ready to connect this repository to your Docker Hub account.
 #### Create Automated Build on Docker Hub
 Start by creating an account on [Docker Hub](https://hub.docker.com/) if you don't have one, and then logging into your account.
 
-Click on the `Create` pulldown on the top left of Docker Hub and then click on `Create Automated Build`. If you haven't linked a Github account yet, you will need to do so before continuing with this guide.
+Click on the `Create` pulldown on the top left of Docker Hub and then click on `Create Automated Build`. If you haven't linked a Github account yet, you will need to do so before continuing with this step. Ensure you give Docker Hub read *and* write access to your Github account.
 
 Select or search for the `swarm-flask-hello` repository in the list Docker Hub displays. Once you've selected the repository, you'll be presented with the `Automated Build` page:
 
 ![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/setupbuild.png)
 
+As shown in the screenshot, you will need to add a snippet of JSON to the `short descriptionn` for the build repo. The reason for this is because Docker Hub won't pass on the Github repository information in the POST hook call we're going to set up in a few minutes.
 
-{"github": {"org": "kordless", "repo": "python-flask-helloworld", "branch": "master"} }
+Here's a sample of the JSON you need to paste in:
+
+```
+{"github": {"org": "kordless", "repo": "python-flask-hello", "branch": "master"} }
+```
+
+Substitute your Github username for `kordless` in the example above and then click on the `Create` button at the bottom of the page to create the new Docker Hub repository build.
+
+**Note:** If you only gave Docker Hub read access to your Github account, you will need to create a build trigger URL. Click on `Build Settings` under the new repo and then click on `Activate` toward the bottom to create a URL to use trigger the build. You will need to paste this URL into the Github repository's webhooks by clicking on `Settings` and `Webhooks & services` on the Github repository you cloned earlier.
+
+#### 
+
