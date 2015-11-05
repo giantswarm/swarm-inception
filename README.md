@@ -64,4 +64,4 @@ Select or search for the `swarm-flask-hello` repository in the list Docker Hub d
 ![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/setupbuild.png)
 
 
-
+{"github": {"org": "kordless", "repo": "python-flask-helloworld", "branch": "master"} }
