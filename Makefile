@@ -2,12 +2,13 @@
 USERNAME = $(shell swarm user)
 TOKEN = $(shell cat ~/.swarm/token)
 ENV = $(shell swarm env)
+ORG = $(shell swarm env | cut -d'/' -f1)
 API_SERVER = api.giantswarm.io
 
 # service info
 SERVICE = inception
 REGISTRY = registry.giantswarm.io
-IMAGE = $(REGISTRY)/$(USERNAME)/$(SERVICE)
+IMAGE = $(REGISTRY)/$(ORG)/$(SERVICE)
 DOMAIN = inception-$(USERNAME).gigantic.io
 PORT = 5000
 DEV_DOMAIN = $(shell boot2docker ip):$(PORT)
