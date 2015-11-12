@@ -4,11 +4,23 @@ from subprocess import call
 import json
 import requests
 
-from giantswarm import swarm_status, swarm_create, swarm_update, swarm_deploy
+from giantswarm import swarm_auth, swarm_status, swarm_create, swarm_update, swarm_deploy
 from github import getdefjson
 import swarmconfig
 
 app = Flask(__name__)
+
+@app.route('/')
+def index():
+	auth = swarmconfig.auth
+
+	# grab this user's info
+	info = swarm_auth(auth)
+
+	if info['result'] == "ok":
+		return("service is up")
+	else:
+		return(info['response'])
 
 # main route
 @app.route('/<org>/<env>/hook', methods=['GET', 'POST'])
@@ -32,7 +44,6 @@ def hook(org=None, env=None):
 		repository = content['repository']['repo_name']
 	except:
 		message = "docker POST doesn't have repo_name"
-		print message
 
 		return jsonify({'response': message})
 

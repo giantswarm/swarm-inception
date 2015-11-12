@@ -14,7 +14,7 @@ PORT = 5000
 DEV_DOMAIN = $(shell boot2docker ip):$(PORT)
 
 config:
-	@ ./config.sh '$(SERVICE)' '$(IMAGE)' '$(DOMAIN)' '$(PORT)' '$(API_SERVER)' '$(TOKEN)'
+	@ ./config.sh '$(SERVICE)' '$(IMAGE)' '$(DOMAIN)' '$(PORT)' '$(API_SERVER)' '$(TOKEN)' '$(ORG)'
 	@echo "Configuration file written to swarmconfig.py..."
 
 build: config
@@ -34,6 +34,9 @@ pull:
 deploy: push
 	swarm up
 	@echo "Use http://$(DOMAIN)/$(ENV)/hook on Docker Hub's hook to deploy a service."
+
+update: push
+	swarm update $(SERVICE)/flask
 
 clean:
 	rm swarm-api.json swarm.json swarmconfig.py

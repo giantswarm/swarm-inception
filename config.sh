@@ -6,7 +6,7 @@ DOMAIN=$3
 PORT=$4
 API_SERVER=$5
 TOKEN=$6
-
+ORG=$7
 
 # build swarm.json
 sed -e "
@@ -28,6 +28,7 @@ s,%PORT%,$PORT,g;
 echo "
 auth = {
 	'token':'$TOKEN',
-	'server':'$API_SERVER'
+	'server':'$API_SERVER',
+	'org':'$ORG'
 } 
 " > swarmconfig.py

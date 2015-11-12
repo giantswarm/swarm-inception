@@ -1,5 +1,43 @@
 import requests, json, time
 
+# test authentication
+def swarm_auth(auth):
+	
+	message = "ok"
+	info = ""
+	headers = {
+		'Authorization': 'giantswarm %s' % auth['token']
+	}
+
+	try:
+		# call the list environment method
+		# GET /v1/org/{org}/env/
+		url = "https://%s/v1/org/%s/env/" % (
+			auth['server'],
+			auth['org']
+		)
+
+		# fetch the response
+		result = requests.get(
+			url,
+			headers=headers
+		)
+	
+		# did we get a 40x response?
+		# why is a 'resource not found' not a 404?
+		if result.status_code >= 400:
+			message = "404"
+			data = "not found"
+		else:	
+			data = json.loads(result.text)['data']
+	
+	except Exception as ex:
+		data = "error"
+		message = "caught exception: %s" % ex
+
+	# return some json
+	return {'result': data, 'response': message}
+
 # get service status
 def swarm_status(auth, definition):
 
