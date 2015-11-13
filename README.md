@@ -1,5 +1,5 @@
 ## Swarm Inception
-Swarm Inception can be used to implement continuous deployments for any Giant Swarm service. Builds are conducted via Docker Hub using Github webhooks. When the build is complete, Docker Hub will call this service's webhooks, which in turn triggers a deployment or update of the service.
+Swarm Inception can be used to implement continuous deployments for any Giant Swarm service. Builds are conducted via Docker Hub using Github webhooks. When the build is complete, Docker Hub will call this service's webhooks, which in turn triggers a deployment or update of the image's service being built by Dockerhub.
 
 Swarm Inception does not provide continuous integration tests. If you would like to do continuous integration builds with tests, you may want to check out [Wercker's CI/CD service](http://wercker.com/).
 
@@ -48,7 +48,7 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 424 bytes | 0 bytes/s, done.
 Total 3 (delta 1), reused 0 (delta 0)
-To https://github.com/kordless/swarm-flask-hello.git
+To https://github.com/bant/swarm-flask-hello.git
    077eddf..743c7aa  master -> master
 ```
 
@@ -68,12 +68,44 @@ As shown in the screenshot, you will need to add a snippet of JSON to the `short
 Here's a sample of the JSON you need to paste in:
 
 ```
-{"github": {"org": "kordless", "repo": "python-flask-hello", "branch": "master"} }
+{"github": {"org": "bant", "repo": "python-flask-hello", "branch": "master"} }
 ```
 
-Substitute your Github username for `kordless` in the example above and then click on the `Create` button at the bottom of the page to create the new Docker Hub repository build.
+Substitute your Github username for `bant` in the example above and then click on the `Create` button at the bottom of the page to create the new Docker Hub repository build.
 
 **Note:** If you only gave Docker Hub read access to your Github account, you will need to create a build trigger URL. Click on `Build Settings` under the new repo and then click on `Activate` toward the bottom to create a URL to use trigger the build. You will need to paste this URL into the Github repository's webhooks by clicking on `Settings` and `Webhooks & services` on the Github repository you cloned earlier.
 
-#### 
+#### Trigger a Build
+On the `Build Settings` tab on the new Docker Hub repo, click on the orange `Trigger a Build` button to the left. This will schedule a build using the Github repository's Dockerfile.
+
+You can check on the status of the build by clicking on the `Build Details` tab at the top:
+
+![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/setupbuild.png)
+
+After a few minutes the build should complete successfully.
+
+#### Start Swarm Inception
+While the test build is running, you can start the Swarm Inception service in your Giant Swarm account. Check the repository out, switch to the directory, and begin the deployment process:
+
+```
+$ git clone https://github.com/giantswarm/swarm-inception.git
+Cloning into 'swarm-inception'...
+remote: Counting objects: 81, done.
+remote: Compressing objects: 100% (39/39), done.
+remote: Total 81 (delta 34), reused 78 (delta 31), pack-reused 0
+Unpacking objects: 100% (81/81), done.
+Checking connectivity... done.
+
+$ cd swarm-inception/
+
+$ make deploy
+Configuration file written to swarmconfig.py...
+docker build -t registry.giantswarm.io/kord/inception .
+Sending build context to Docker daemon 501.8 kB
+...<snip>
+```
+
+**Note:** The Swarm Inception service will build and push a Docker image from your local machine to Giant Swarm's repository. ls
+
+
 
