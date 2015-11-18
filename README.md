@@ -124,7 +124,7 @@ http://sample-<username>.gigantic.io/
 
 Keep in mind if you do subsequent commits to your directory, Docker will do a build of the image and then call an `update` on your Giant Swarm service!
 
-![beachboys](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/barcelona.png)
+![beachboys](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/barcelona.jpg)
 
 From Barcelona with Love,
 
