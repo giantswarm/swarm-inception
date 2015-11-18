@@ -68,6 +68,7 @@ def hook(org=None, env=None):
 		"swarm-api.json"
 	)
 
+	print definition
 	# look and see if we found the definition on github
 	if definition['response'] == "ok":
 		# remove return wrapper
@@ -77,7 +78,7 @@ def hook(org=None, env=None):
 
 	# check if the service is running on Giant Swarm
 	status = swarm_status(auth, definition)
-
+	print status
 	if status['response'] == "ok":
 		# toggle behavior on status
 		if status['result']['status'] == "up":

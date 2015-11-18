@@ -14,6 +14,7 @@ def getdefjson(org=None, repo=None, branch=None, filename=None):
 		filename
 	)
 
+	print url
 	try:
 		# fetch the response
 		result = requests.get(

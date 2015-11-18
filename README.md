@@ -68,24 +68,15 @@ As shown in the screenshot, you will need to add a snippet of JSON to the `short
 Here's a sample of the JSON you need to paste in:
 
 ```
-{"github": {"org": "bant", "repo": "python-flask-hello", "branch": "master"} }
+{"github": {"org": "bant", "repo": "swarm-flask-hello", "branch": "master"} }
 ```
 
-Substitute your Github username for `bant` in the example above and then click on the `Create` button at the bottom of the page to create the new Docker Hub repository build.
+Substitute your *Github username* for `bant` in the example above and then click on the `Create` button at the bottom of the page to create the new Docker Hub repository build.
 
 **Note:** If you only gave Docker Hub read access to your Github account, you will need to create a build trigger URL. Click on `Build Settings` under the new repo and then click on `Activate` toward the bottom to create a URL to use trigger the build. You will need to paste this URL into the Github repository's webhooks by clicking on `Settings` and `Webhooks & services` on the Github repository you cloned earlier.
 
-#### Trigger a Build
-On the `Build Settings` tab on the new Docker Hub repo, click on the orange `Trigger a Build` button to the left. This will schedule a build using the Github repository's Dockerfile.
-
-You can check on the status of the build by clicking on the `Build Details` tab at the top:
-
-![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/setupbuild.png)
-
-After a few minutes the build should complete successfully.
-
 #### Start Swarm Inception
-While the test build is running, you can start the Swarm Inception service in your Giant Swarm account. Check the repository out, switch to the directory, and begin the deployment process:
+Now it's time to start the Swarm Inception service in your Giant Swarm account. Check the repository out, switch to the directory, and begin the deployment process:
 
 ```
 $ git clone https://github.com/giantswarm/swarm-inception.git
@@ -105,7 +96,34 @@ Sending build context to Docker daemon 501.8 kB
 ...<snip>
 ```
 
-**Note:** The Swarm Inception service will build and push a Docker image from your local machine to Giant Swarm's repository. ls
+**Note:** The Swarm Inception service will build and push a Docker image from your local machine to Giant Swarm's repository.
 
+#### Build and Deploy the Flask Hello Project
+Builds and deploys for the `swarm-flask-hello` project occur when you do code pushes to the `master` branch of your newly forked `swarm-flask-hello` repo. To trigger the build, navigate back to the project's repo in your Github account and edit the `index.html` file in the `templates` directory to look something like this:
 
+```
+<!doctype html>
+<title>Hello from Barcelona!</title>
+{% if name %}
+  <h1>Hello {{ name }}!</h1>
+{% else %}
+  <h1>Hello Bants!</h1>
+{% endif %}
+```
 
+![lama lama ding dong](https://github.com/kordless/swarm-flask-hello/blob/master/assets/setupbuild.png)
+
+When you are done editing the file, click on the `commit changes` button at the bottom. Docker Hub will start building your image within 10 minutes or so. When it is done, it will call the `swarm-inception` service you started in the previous section, or update it if it was already running.
+
+### Access the New Service
+To access the newly built `swarm-flask-hello` service, you will use the following URL format:
+
+```
+http://sample-<username>.gigantic.io/
+```
+
+Keep in mind if you do subsequent commits to your directory, Docker will do a build of the image and then call an `update` on your Giant Swarm service!
+
+From Barcelona with Love,
+
+Kord

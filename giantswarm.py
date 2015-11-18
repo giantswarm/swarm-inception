@@ -41,6 +41,7 @@ def swarm_auth(auth):
 # get service status
 def swarm_status(auth, definition):
 
+	print "checking status"
 	message = "ok"
 	status = ""
 	headers = {
