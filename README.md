@@ -111,7 +111,7 @@ Builds and deploys for the `swarm-flask-hello` project occur when you do code pu
 {% endif %}
 ```
 
-![lama lama ding dong](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/setupbuild.png)
+![lama lama ding dong](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/edit.png)
 
 When you are done editing the file, click on the `commit changes` button at the bottom. Docker Hub will start building your image within 10 minutes or so. When it is done, it will call the `swarm-inception` service you started in the previous section, or update it if it was already running.
 
@@ -123,6 +123,8 @@ http://sample-<username>.gigantic.io/
 ```
 
 Keep in mind if you do subsequent commits to your directory, Docker will do a build of the image and then call an `update` on your Giant Swarm service!
+
+![beachboys](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/barcelona.png)
 
 From Barcelona with Love,
 
