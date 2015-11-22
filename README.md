@@ -1,5 +1,5 @@
 ## Swarm Inception
-Swarm Inception can be used to implement continuous deployments for any Giant Swarm service. Builds are conducted via Docker Hub using Github webhooks. When the build is complete, Docker Hub will call this service's webhooks, which in turn triggers a deployment or update of the image's service being built by Dockerhub.
+Swarm Inception can be used to implement continuous deployments for any Giant Swarm service. Builds are conducted via [Docker Hub](https://hub.docker.com) using [Github webhooks](https://developer.github.com/webhooks/). When the build is complete, Docker Hub will call this service's webhook handler, which in turn triggers a deployment or update of the image built by Dockerhub onto Giant Swarm's public cloud.
 
 Swarm Inception does not provide continuous integration tests. If you would like to do continuous integration builds with tests, you may want to check out [Wercker's CI/CD service](http://wercker.com/).
 
