@@ -13,7 +13,7 @@ At a minimum you will need the following to launch this guide's services:
 ### Video Walkthrough
 Here's another fine video guide by your's truly. Look for the kick.
 
-[![](https://raw.githubusercontent.com/giantswarm/swarm-wercker/master/static/video.png)](https://vimeo.com/134043502)
+[![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/video.png)](https://vimeo.com/134043502)
 
 ### Getting Started
 This project should take you about 10 minutes to run through. We'll start by forking the sample repo, setting up a Docker Hub account and then configuring it to build the repo.
