@@ -61,7 +61,7 @@ Click on the `Create` pulldown on the top left of Docker Hub and then click on `
 
 Select or search for the `swarm-flask-hello` repository in the list Docker Hub displays. Once you've selected the repository, you'll be presented with the `Automated Build` page:
 
-![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/setupbuild.png)
+![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/build.png)
 
 As shown in the screenshot, you will need to add a snippet of JSON to the `short descriptionn` for the build repo. The reason for this is because Docker Hub won't pass on the Github repository information in the POST hook call we're going to set up in a few minutes.
 
