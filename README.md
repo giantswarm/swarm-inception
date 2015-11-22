@@ -21,13 +21,12 @@ This project should take you about 10 minutes to run through. We'll start by for
 #### Fork the Repo
 Start by heading over to [the swarm-flask-hello repo](https://github.com/giantswarm/swarm-flask-hello) and **fork it** into your Github account. Make sure you leave the repository public!
 
-There are detailed [instructions](https://github.com/giantswarm/swarm-flask-helloworld/blob/master/README.md#flask-helloworld) on the repository's `README.md` file you may follow. The basics are covered here for review. 
+There are detailed [instructions](https://github.com/giantswarm/swarm-flask-helloworld/blob/master/README.md#flask-helloworld) on the repository's `README.md` file you may follow. The basics are covered here for review, and require you have cloned your own fork of repo locally. 
 
-Start by verifying you have built and checked in the `swarm-api.json` file for the `swarm-flask-hello` repo:
+Verify you have built and checked in the `swarm-api.json` file for the `swarm-flask-hello` repo as directed in the [instructions](https://github.com/giantswarm/swarm-flask-helloworld/blob/master/README.md#flask-helloworld):
 
 ```
-$ cd swarm-flask-hello # ensure this is your forked copy
-
+$ cd swarm-flask-hello
 $ make config
 rm -f swarm-api.json swarm.json
 ##########################################################
@@ -55,9 +54,13 @@ To https://github.com/bant/swarm-flask-hello.git
 You are now ready to connect this repository to your Docker Hub account.
 
 #### Create Automated Build on Docker Hub
-Start by creating an account on [Docker Hub](https://hub.docker.com/) if you don't have one, and then logging into your account.
+Start by creating an account on [Docker Hub](https://hub.docker.com/) if you don't have one, and then login.
 
-Click on the `Create` pulldown on the top left of Docker Hub and then click on `Create Automated Build`. If you haven't linked a Github account yet, you will need to do so before continuing with this step. Ensure you give Docker Hub read *and* write access to your Github account.
+Click on the `Create` pulldown on the top left of Docker Hub and then click on `Create Automated Build`. If you haven't linked a Github account yet, you will need to do so before continuing with this step. Ensure you give Docker Hub *read and write* access to your Github account.
+
+Once you've added an account, you'll be shown a list of organizations and repos.
+
+![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/list.png)
 
 Select or search for the `swarm-flask-hello` repository in the list Docker Hub displays. Once you've selected the repository, you'll be presented with the `Automated Build` page:
 
