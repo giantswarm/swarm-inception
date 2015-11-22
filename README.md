@@ -60,7 +60,7 @@ Click on the `Create` pulldown on the top left of Docker Hub and then click on `
 
 Once you've added an account, you'll be shown a list of organizations and repos.
 
-![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/list.png)
+![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/listrepo.png)
 
 Select or search for the `swarm-flask-hello` repository in the list Docker Hub displays. Once you've selected the repository, you'll be presented with the `Automated Build` page:
 
