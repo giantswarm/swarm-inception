@@ -18,8 +18,31 @@ Here's another fine video guide by your's truly. Look for the kick.
 ### Getting Started
 This project should take you about 10 minutes to run through. We'll start by forking the sample repo, setting up a Docker Hub account and then configuring it to build the repo.
 
+#### Start Swarm Inception
+You need to start the Swarm Inception service in your Giant Swarm account first. Check the repository out, switch to the directory, and begin the deployment process:
+
+```
+$ git clone https://github.com/giantswarm/swarm-inception.git
+Cloning into 'swarm-inception'...
+remote: Counting objects: 81, done.
+remote: Compressing objects: 100% (39/39), done.
+remote: Total 81 (delta 34), reused 78 (delta 31), pack-reused 0
+Unpacking objects: 100% (81/81), done.
+Checking connectivity... done.
+
+$ cd swarm-inception/
+
+$ make deploy
+Configuration file written to swarmconfig.py...
+docker build -t registry.giantswarm.io/kord/inception .
+Sending build context to Docker daemon 501.8 kB
+...<snip>
+```
+
+**Note:** The Swarm Inception service will build and push a Docker image from your local machine to Giant Swarm's repository.
+
 #### Fork the Repo
-Start by heading over to [the swarm-flask-hello repo](https://github.com/giantswarm/swarm-flask-hello) and **fork it** into your Github account. Make sure you leave the repository public!
+Next, head over to [the swarm-flask-hello repo](https://github.com/giantswarm/swarm-flask-hello) and **fork it** into your Github account. Make sure you leave the repository public!
 
 There are detailed [instructions](https://github.com/giantswarm/swarm-flask-helloworld/blob/master/README.md#flask-helloworld) on the repository's `README.md` file you may follow. The basics are covered here for review, and require you have cloned your own fork of repo locally. 
 
@@ -53,8 +76,8 @@ To https://github.com/bant/swarm-flask-hello.git
 
 You are now ready to connect this repository to your Docker Hub account.
 
-#### Create Automated Build on Docker Hub
-Start by creating an account on [Docker Hub](https://hub.docker.com/) if you don't have one, and then login.
+#### Create an Automated Build on Docker Hub
+Create an account on [Docker Hub](https://hub.docker.com/) if you don't have one, and then login.
 
 Click on the `Create` pulldown on the top left of Docker Hub and then click on `Create Automated Build`. If you haven't linked a Github account yet, you will need to do so before continuing with this step. Ensure you give Docker Hub *read and write* access to your Github account.
 
@@ -78,30 +101,20 @@ Substitute your *Github username* for `bant` in the example above and then click
 
 **Note:** If you only gave Docker Hub read access to your Github account, you will need to create a build trigger URL. Click on `Build Settings` under the new repo and then click on `Activate` toward the bottom to create a URL to use trigger the build. You will need to paste this URL into the Github repository's webhooks by clicking on `Settings` and `Webhooks & services` on the Github repository you cloned earlier.
 
-#### Start Swarm Inception
-Now it's time to start the Swarm Inception service in your Giant Swarm account. Check the repository out, switch to the directory, and begin the deployment process:
+#### Create a Webhook to the Inception Service
+Finally, click on the `webhooks` tab in the Docker repo and then click on the `Add Webhook` button to create a new webhook. You'll use the following URL format for the URL:
 
 ```
-$ git clone https://github.com/giantswarm/swarm-inception.git
-Cloning into 'swarm-inception'...
-remote: Counting objects: 81, done.
-remote: Compressing objects: 100% (39/39), done.
-remote: Total 81 (delta 34), reused 78 (delta 31), pack-reused 0
-Unpacking objects: 100% (81/81), done.
-Checking connectivity... done.
-
-$ cd swarm-inception/
-
-$ make deploy
-Configuration file written to swarmconfig.py...
-docker build -t registry.giantswarm.io/kord/inception .
-Sending build context to Docker daemon 501.8 kB
-...<snip>
+http://inception-<username>.gigantic.io/<org>/<env>/hook
 ```
 
-**Note:** The Swarm Inception service will build and push a Docker image from your local machine to Giant Swarm's repository.
+Change the `<username>`, `<org>` and `<env>` entries above to whatever was output by the launch of the Inception service above.
 
-#### Build and Deploy the Flask Hello Project
+![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/hook.png)
+
+Name the webhook something like `dev deployment` and then click on `Add URL` to finish adding the webhook URL.
+
+#### Do a Commit to the Flask Hello Project
 Builds and deploys for the `swarm-flask-hello` project occur when you do code pushes to the `master` branch of your newly forked `swarm-flask-hello` repo. To trigger the build, navigate back to the project's repo in your Github account and edit the `index.html` file in the `templates` directory to look something like this:
 
 ```
