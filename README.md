@@ -13,7 +13,7 @@ At a minimum you will need the following to launch this guide's services:
 ### Video Walkthrough
 Here's another fine video guide by your's truly. Look for the kick.
 
-[![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/video.png)](https://vimeo.com/134043502)
+[![](https://raw.githubusercontent.com/giantswarm/swarm-inception/master/assets/video.png)](https://vimeo.com/146725428)
 
 ### Getting Started
 This project should take you about 10 minutes to run through. We'll start by forking the sample repo, setting up a Docker Hub account and then configuring it to build the repo.
@@ -37,11 +37,21 @@ Configuration file written to swarmconfig.py...
 docker build -t registry.giantswarm.io/kord/inception .
 Sending build context to Docker daemon 501.8 kB
 ...<snip>
+Creating 'inception' in the 'kord/dev' environment…
+Service created successfully!
+Starting service 'inception'…
+Waiting for 'inception' to get started…
+Service 'inception' is up.
+You can see all components using this command:
+
+    swarm status inception
+
+Use http://inception-bant.gigantic.io/bant/dev/hook on Docker Hub's hook to deploy a service.
 ```
 
 **Note:** The Swarm Inception service will build and push a Docker image from your local machine to Giant Swarm's repository.
 
-#### Fork the Repo
+#### Fork the Sample Service Repo
 Next, head over to [the swarm-flask-hello repo](https://github.com/giantswarm/swarm-flask-hello) and **fork it** into your Github account. Make sure you leave the repository public!
 
 There are detailed [instructions](https://github.com/giantswarm/swarm-flask-helloworld/blob/master/README.md#flask-helloworld) on the repository's `README.md` file you may follow. The basics are covered here for review, and require you have cloned your own fork of repo locally. 
