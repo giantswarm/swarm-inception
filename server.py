@@ -35,7 +35,6 @@ def hook(org=None, env=None):
 		content = request.get_json()
 	except Exception as e:
 		message = "an error occured: %s" % e
-		print message
 
 		return jsonify({'response': message})
 
@@ -68,23 +67,21 @@ def hook(org=None, env=None):
 		"swarm-api.json"
 	)
 
-	print definition
 	# look and see if we found the definition on github
 	if definition['response'] == "ok":
 		# remove return wrapper
-		definition = definition['result'] 
+		definition = definition['result']
 	else:
 		return jsonify({'response': "fail"})
 
 	# check if the service is running on Giant Swarm
 	status = swarm_status(auth, definition)
-	print status
+
 	if status['response'] == "ok":
 		# toggle behavior on status
 		if status['result']['status'] == "up":
 			# do an update on the image's component
-			print "updating component..."
-			swarm_update(auth, definition, repository)
+			print swarm_update(auth, definition, repository)
 		else:
 			print "service is in an unknown state...exiting"
 

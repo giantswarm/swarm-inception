@@ -156,7 +156,7 @@ def swarm_start(auth, definition):
 def swarm_update(auth, definition, repository):
 
 	message = "ok"
-	status = ""
+	data = ""
 	headers = {
 		'Authorization': 'giantswarm %s' % auth['token'],
 		'content-type': 'application/json'
@@ -164,7 +164,8 @@ def swarm_update(auth, definition, repository):
 
 	# loop over the components
 	for key in definition['definition']['components']:
-		if repository == definition['definition']['components'][key]['image']:
+		if repository in definition['definition']['components'][key]['image']:
+			print "trying update"
 			# do an update of this component
 			try:
 				# call the create service method
@@ -175,7 +176,6 @@ def swarm_update(auth, definition, repository):
 					auth['env'],
 					definition['definition']['name']
 				)
-				print key
 
 				# set the component to the key and version to latest
 				data = {
@@ -191,12 +191,10 @@ def swarm_update(auth, definition, repository):
 				)
 			
 				data = json.loads(result.text)
-				print data
 
 			except Exception as ex:
 				data = "error"
 				message = "caught exception: %s" % ex
-				print message
 
 	# return some json
 	return {'result': data, 'response': message}
