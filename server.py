@@ -25,6 +25,8 @@ def index():
 # main route
 @app.route('/<org>/<env>/hook', methods=['GET', 'POST'])
 def hook(org=None, env=None):
+	result = ""
+	
 	# patch the config
 	auth = swarmconfig.auth
 	auth['env'] = env
@@ -81,16 +83,18 @@ def hook(org=None, env=None):
 		# toggle behavior on status
 		if status['result']['status'] == "up":
 			# do an update on the image's component
-			print swarm_update(auth, definition, repository)
+			result = swarm_update(auth, definition, repository)
+			print result
 		else:
 			print "service is in an unknown state...exiting"
 
 	elif status['response'] == "404":
 		# service not running, so deploy
 		print "deploying service..."
-		print swarm_deploy(auth, definition)
+		result = swarm_deploy(auth, definition)
+		print result
 
-	return jsonify({'response': "ok"})
+	return jsonify({'response': "ok", 'result': result})
 
 
 # finally, our entrypoint...

@@ -45,7 +45,8 @@ def swarm_status(auth, definition):
 	message = "ok"
 	status = ""
 	headers = {
-		'Authorization': 'giantswarm %s' % auth['token']
+		'Authorization': 'giantswarm %s' % auth['token'],
+		'X-Giant-Swarm-ClusterID': 'leaseweb-alpha-private.giantswarm.io'
 	}
 
 	# grab the service name
@@ -90,7 +91,8 @@ def swarm_create(auth, definition):
 	data = ""
 	headers = {
 		'Authorization': 'giantswarm %s' % auth['token'],
-		'content-type': 'application/json'
+		'content-type': 'application/json',
+		'X-Giant-Swarm-ClusterID': 'leaseweb-alpha-private.giantswarm.io'
 	}
 
 	try:
@@ -124,7 +126,8 @@ def swarm_start(auth, definition):
 	data = ""
 	headers = {
 		'Authorization': 'giantswarm %s' % auth['token'],
-		'content-type': 'application/json'
+		'content-type': 'application/json',
+		'X-Giant-Swarm-ClusterID': 'leaseweb-alpha-private.giantswarm.io'
 	}
 
 	try:
@@ -159,7 +162,8 @@ def swarm_update(auth, definition, repository):
 	data = ""
 	headers = {
 		'Authorization': 'giantswarm %s' % auth['token'],
-		'content-type': 'application/json'
+		'content-type': 'application/json',
+		'X-Giant-Swarm-ClusterID': 'leaseweb-alpha-private.giantswarm.io'
 	}
 
 	# loop over the components
@@ -170,7 +174,7 @@ def swarm_update(auth, definition, repository):
 			try:
 				# call the create service method
 				# POST /v1/org/{org}/env/{env}/service/{service}/start
-				url = "https://%s/v1/org/%s/env/%s/service/%s/component/update" % (
+				url = "https://%s/v2/org/%s/env/%s/service/%s/component/update" % (
 					auth['server'],
 					auth['org'],
 					auth['env'],
@@ -195,6 +199,11 @@ def swarm_update(auth, definition, repository):
 			except Exception as ex:
 				data = "error"
 				message = "caught exception: %s" % ex
+				break
+
+		# grab the last one
+		message = data
+		
 
 	# return some json
 	return {'result': data, 'response': message}

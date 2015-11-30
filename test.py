@@ -5,17 +5,20 @@ headers = {
 	'content-type': 'application/json'
 }
 
-url = "http://192.168.59.103:5000/kord/dev/hook"
+url = "http://inception-kord.gigantic.io/kord/dev/hook"
 data = {
 	'repository': {
-		'repo_name': 'kordless/python-flask-helloworld',
-		'repo_url': 'https://registry.hub.docker.com/u/kordless/python-flask-helloworld/'
-		'description': {
-			"github": {
-				"org": "kordless",
-				"repo": "python-flask-helloworld"
-			}
-		}
+		'repo_name': 'kordinator/python-flask-hello',
+		'repo_url': 'https://registry.hub.docker.com/u/kordinator/swarm-flask-hello/',
+		'description': ' \
+		{ \
+			"github": { \
+				"org": "kordless", \
+				"repo": "swarm-flask-hello", \
+				"branch": "master" \
+			} \
+		} \
+		'
 	}
 }
 
@@ -26,4 +29,4 @@ result = requests.post(
 	headers=headers
 )
 
-print result
+print result.text
