@@ -78,6 +78,8 @@ def hook(org=None, env=None):
 
 	# check if the service is running on Giant Swarm
 	status = swarm_status(auth, definition)
+	print status
+	print definition
 
 	if status['response'] == "ok":
 		# toggle behavior on status

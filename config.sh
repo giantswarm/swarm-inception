@@ -7,6 +7,7 @@ PORT=$4
 API_SERVER=$5
 TOKEN=$6
 ORG=$7
+CLUSTER_ID=$8
 
 # build swarm.json
 sed -e "
@@ -29,6 +30,7 @@ echo "
 auth = {
 	'token':'$TOKEN',
 	'server':'$API_SERVER',
-	'org':'$ORG'
+	'org':'$ORG',
+	'cluster_id': '$CLUSTER_ID'
 } 
 " > swarmconfig.py

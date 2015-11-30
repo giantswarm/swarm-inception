@@ -4,9 +4,10 @@ import requests, json, time
 def swarm_auth(auth):
 	
 	message = "ok"
-	info = ""
+	data = ""
 	headers = {
-		'Authorization': 'giantswarm %s' % auth['token']
+		'Authorization': 'giantswarm %s' % auth['token'],
+		'X-Giant-Swarm-ClusterID %s': auth['cluster_id']
 	}
 
 	try:
@@ -41,12 +42,11 @@ def swarm_auth(auth):
 # get service status
 def swarm_status(auth, definition):
 
-	print "checking status"
 	message = "ok"
-	status = ""
+	data = ""
 	headers = {
 		'Authorization': 'giantswarm %s' % auth['token'],
-		'X-Giant-Swarm-ClusterID': 'leaseweb-alpha-private.giantswarm.io'
+		'X-Giant-Swarm-ClusterID %s': auth['cluster_id']
 	}
 
 	# grab the service name
@@ -92,7 +92,7 @@ def swarm_create(auth, definition):
 	headers = {
 		'Authorization': 'giantswarm %s' % auth['token'],
 		'content-type': 'application/json',
-		'X-Giant-Swarm-ClusterID': 'leaseweb-alpha-private.giantswarm.io'
+		'X-Giant-Swarm-ClusterID %s': auth['cluster_id']
 	}
 
 	try:
@@ -127,7 +127,7 @@ def swarm_start(auth, definition):
 	headers = {
 		'Authorization': 'giantswarm %s' % auth['token'],
 		'content-type': 'application/json',
-		'X-Giant-Swarm-ClusterID': 'leaseweb-alpha-private.giantswarm.io'
+		'X-Giant-Swarm-ClusterID': auth['cluster_id']
 	}
 
 	try:
@@ -163,7 +163,7 @@ def swarm_update(auth, definition, repository):
 	headers = {
 		'Authorization': 'giantswarm %s' % auth['token'],
 		'content-type': 'application/json',
-		'X-Giant-Swarm-ClusterID': 'leaseweb-alpha-private.giantswarm.io'
+		'X-Giant-Swarm-ClusterID': auth['cluster_id']
 	}
 
 	# loop over the components
@@ -209,6 +209,7 @@ def swarm_update(auth, definition, repository):
 	return {'result': data, 'response': message}
 
 def swarm_deploy(auth, definition):
+
 	# do a swarm create
 	create = swarm_create(auth, definition)
 
