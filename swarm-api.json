@@ -9,7 +9,7 @@
         ],
         "domains": {
           "5000/tcp": [
-            "inception-kord.gigantic.io"
+            "inception-kord..gigantic.io"
           ]
         }
       }
