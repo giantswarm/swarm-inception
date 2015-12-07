@@ -6,11 +6,14 @@ ORG = $(shell swarm env | cut -d'/' -f1)
 
 # service info
 SERVICE = inception
-CLUSTER = aws # use 'lw' for leaseweb
-API_SERVER = $(shell ./cluster.sh $(CLUSTER) api)
-REGISTRY = $(shell ./cluster.sh $(CLUSTER) registry)
-CLUSTER_ID = $(shell ./cluster.sh $(CLUSTER) id)
-DOMAIN = inception-$(USERNAME).$(shell ./cluster.sh $(CLUSTER) domain)
+#API_SERVER = api.leaseweb-alpha.giantswarm.io
+API_SERVER = api.giantswarm.io
+#REGISTRY = registry02.giantswarm.io
+REGISTRY = registry.giantswarm.io
+#CLUSTER_ID = leaseweb-alpha-private.giantswarm.io
+CLUSTER_ID = aws-alpha.giantswarm.io
+#DOMAIN = inception-$(USERNAME).leaseweb-alpha.giantswarm.io
+DOMAIN = inception-$(USERNAME).gigantic.io
 IMAGE = $(REGISTRY)/$(ORG)/$(SERVICE)
 PORT = 5000
 DEV_DOMAIN = $(shell boot2docker ip):$(PORT)
